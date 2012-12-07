@@ -4,9 +4,9 @@ function route(parsedRequest, response,resolve,http) {
   {
 	errmsg = "Unable to process request. Parameter 'local' is not set. ";	
   }
-  if(parsedRequest.query["isil"] == undefined || parsedRequest.query["isil"] == "") 
+  if(parsedRequest.query["bib"] == undefined || parsedRequest.query["bib"] == "") 
   {
-    errmsg = errmsg + "Unable to process request. Parameter 'isil' is not set.";
+    errmsg = errmsg + "Unable to process request. Parameter 'bib' is not set.";
   }
   if(parsedRequest.query["zdb"] == undefined || parsedRequest.query["zdb"] == "") 
   {
