@@ -28,3 +28,6 @@ Der ZDB-Linkresolver sucht nach dem Titel mit der ZDB-ID 954135-4 und schaut nac
 http://mynodesubdomain.mylibrarydomain.de:8888/?localUrl=http%3A%2F%2Fsuche.mylibrarydomain.de%2Fsearchterm%3D&bib=46&zdb=954135-4
 
 Hier wird einfach nur nachgeschaut, ob die Bibliothek (Sigel 46) Bestand hat. Wenn ja, gibt dann einen Backlink in den Katalog mit der ZDB-ID als Suchparameter (Grundeinstellung)  http://suche.mylibrarydomain.de/searchterm=954135-4
+
+## Start und Test
+Starten Sie den ZDB-Linkresolver mir 'node index.js'. Der Resolver ist unter dem Port 8888 zu finden. Test sind unter /test/ zu finden.
