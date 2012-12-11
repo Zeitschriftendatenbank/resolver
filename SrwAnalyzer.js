@@ -4,7 +4,7 @@ var xml2js = require('xml2js');
 var jsonpath = require('JSONPath').eval;
 // needs eyes to be installed
 var inspect = require('eyes').inspector({maxLength: false})
-function analyze(srw,response,parsedRequest,buildResolveUrl){
+function analyze(srw,response,parsedRequest,http,buildResolveBody){
 
 	try{
 		var parser = new xml2js.Parser();
@@ -14,8 +14,8 @@ function analyze(srw,response,parsedRequest,buildResolveUrl){
 				//console.dir(result.diagnostics);
 				if(typeof result.diagnostics != "undefined") 
 				{
-					e = new Error("<h1>500 Internal Server Error</h1>Unerwarter SRU-Fehler");
-					e.statusCode = 500;
+					e = new Error(http.STATUS_CODES[422]);
+					e.statusCode = 422;
 					throw e;
 				}
 				var sRR = result.searchRetrieveResponse;
@@ -24,11 +24,11 @@ function analyze(srw,response,parsedRequest,buildResolveUrl){
 				var statusCode;
 				//console.log("NumberofRecords: " + numberOfRecords);
 				// only when found something
-				if(numberOfRecords == 0)
+				if(numberOfRecords == 0) 
 				{
-						e = new Error("<h1>404 Not Found</h1>Die ID " + parsedRequest.query['zdb'] + " konnte nicht gefunden werden.");
-						e.statusCode = 404;
-						throw e;
+					e = new Error(http.STATUS_CODES[404]);
+					e.statusCode = 404;
+					throw e;
 				}
 
 				//console.dir(sRR.records);
@@ -43,7 +43,7 @@ function analyze(srw,response,parsedRequest,buildResolveUrl){
 					// all subfileds uf
 					//var uf = jsonpath(allFields[u], "$.uf[?(@.code='v')]");
 					var uf = jsonpath(allFields[u], "$.uf");
-					inspect(uf);
+					//inspect(uf);
 					if(uf[0] != "undefined")
 					{
 						//console.log("uf[0]: " + uf[0]);
@@ -68,20 +68,20 @@ function analyze(srw,response,parsedRequest,buildResolveUrl){
 					}
 					else 
 					{
-						e = new Error("<h1>500 Internal Server Error</h1>Unerwarter SRU-Fehler");
+						e = new Error(http.STATUS_CODES[500]);
 						e.statusCode = 500;
 						throw e;
 					}
 				}
 
 				// callback
-				buildResolveUrl(sigSo);
+				buildResolveBody(sigSo,response,http);
 			}
 		);
 	} catch(e){
 		//console.log("xml2js says Error: " + e.message);
 		response.writeHead(e.statusCode, {"Content-Type": "text/html"});
-		response.write("Analyzer: " + e.message);
+		response.write("Analyzer says: " + e.message);
 		response.end();
 	}
 

@@ -1,5 +1,5 @@
 var SrwAnalyzer = require("./SrwAnalyzer");
-function reqSru(parsedRequest,response,http,buildResolveUrl){
+function reqSru(parsedRequest,response,http,buildResolveBody){
 	var zdbParam = "zdbid%3D"+parsedRequest.query["zdb"];
 	var options = {
 		hostname: 'services.d-nb.de',
@@ -27,15 +27,17 @@ function reqSru(parsedRequest,response,http,buildResolveUrl){
 		{
 			//the whole response has been recieved, so we give it to the analyzer
 			res.on('end', function () {
-				SrwAnalyzer.analyze(srw,response,parsedRequest,buildResolveUrl);
+				SrwAnalyzer.analyze(srw,response,parsedRequest,http,buildResolveBody);
 			});
 		}
 		else
 		{
 			console.log("Error not received status code 200.\nStatus code: " + res.statuscode + "\nHEADERS: " + JSON.stringify(res.headers));
-			response.writeHead(503, {"Content-Type": "text/html"});
-			response.write("<h1>503 Service Temporarily Unavailable.</h1>");
-			response.end();
+			response.statusCode = res.statusCode;
+			buildResolveBody(false,response,http);
+			//response.writeHead(503, {"Content-Type": "text/html"});
+			//response.write("<h1>503 Service Temporarily Unavailable.</h1>");
+			//response.end();
 		}
 	}
 	http.request(options, callback).end();
