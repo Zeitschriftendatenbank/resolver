@@ -1,4 +1,15 @@
+var fs = require('fs');
 function route(parsedRequest, response,resolve,http) {
+	if(parsedRequest.path == "/test/"){
+		//console.log(parsedRequest.path);
+		fs.readFile('test/test.html', function (err, data) {
+			if (err) throw err;
+			response.writeHead(200, {"Content-Type": "text/html"});
+			response.write(data);
+			response.end();	
+		});
+	}
+	else{
 	var errmsg = "";
 	if (typeof parsedRequest.query["localUrl"] == 'undefined' || parsedRequest.query["localUrl"] == "") 
 	{
@@ -27,6 +38,7 @@ function route(parsedRequest, response,resolve,http) {
 		response.end();	
 	} else {
 		resolve(parsedRequest, response,http);
+	}
 	}
 }
 
