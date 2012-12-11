@@ -4,8 +4,7 @@ function route(parsedRequest, response,resolve,http) {
   {
 	errmsg = "Unable to process request. Parameter 'localUrl' is not set. ";	
   }
-  
-  if(typeof parsedRequest.query["localSearchParam"] != 'undefined')
+ 
   if(typeof parsedRequest.query["bib"] == 'undefined' || parsedRequest.query["bib"] == "") 
   {
     errmsg = errmsg + "Unable to process request. Parameter 'bib' is not set.";
