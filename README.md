@@ -12,8 +12,11 @@ Resolver von Links auf verwandte Ressourcen (Vorgänger, Nachfolger, Parallelaus
 
 ## Parameter
 __localUrl__ (obligatorisch): Die URL für den Backlink in ihren Katalog (URL-kodiert)
+
 __zdbid__ (obligatorisch): Die ZDB-ID der verwandten Ressource
+
 __bib__ (obligatorisch): Das Bibliothekssigel ihrer Einrichtung
+
 __localSearchParam__ (optional): Eine von 'zdb' (ZDB-ID), 'sig' (Signatur) oder 'so' (Standort)
 
 ## Fiktive Beispiele
