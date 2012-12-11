@@ -1,13 +1,10 @@
 var SrwAnalyzer = require("./SrwAnalyzer");
 function reqSru(parsedRequest,response,http,buildResolveUrl){
-	var baseUrl = "http://services.d-nb.de/sru/zdb?version=1.1&recordSchema=MABxml-1-plus&operation=searchRetrieve&query=";
 	var zdbParam = "zdbid%3D"+parsedRequest.query["zdb"];
-	var isilParam = "sigel%3D"+parsedRequest.query["bib"];
-	var sruUrl = baseUrl+zdbParam+"+"+isilParam;
 	var options = {
 		hostname: 'services.d-nb.de',
 		port: 80,
-		path: '/sru/zdb?version=1.1&recordSchema=MABxml-1-plus&operation=searchRetrieve&query='+zdbParam+'+'+isilParam,
+		path: '/sru/zdb?version=1.1&recordSchema=MABxml-1-plus&operation=searchRetrieve&query='+zdbParam,
 		method: 'GET'
 	};
 	
@@ -37,7 +34,7 @@ function reqSru(parsedRequest,response,http,buildResolveUrl){
 		{
 			console.log("Error not received status code 200.\nStatus code: " + res.statuscode + "\nHEADERS: " + JSON.stringify(res.headers));
 			response.writeHead(503, {"Content-Type": "text/html"});
-			response.write("503 Service Temporarily Unavailable.");
+			response.write("<h1>503 Service Temporarily Unavailable.</h1>");
 			response.end();
 		}
 	}
