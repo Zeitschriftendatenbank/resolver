@@ -21,11 +21,11 @@ __localSearchParam__ (optional): Eine von 'zdb' (ZDB-ID), 'sig' (Signatur) oder 
 
 ## Fiktive Beispiele
 ###1
-http://mynodesubdomain.mylibrarydomain.de:8888/?localUrl=http%3A%2F%2Fsuche.mylibrarydomain.de%2Fsearchterm%3D&bib=46&zdb=954135-4&localSearchParam=sig
+http://mylibrarydomain.de:8888/?localUrl=http%3A%2F%2Fsuche.mylibrarydomain.de%2Fsearchterm%3D&bib=46&zdb=954135-4&localSearchParam=sig
 
 Der ZDB-Linkresolver sucht nach dem Titel mit der ZDB-ID 954135-4 und schaut nach, ob die Bibliothek, welche das Bibliothekssigel 46 hat, Bestand an dem Titel hat. Wenn ja, wird die Signatur extrahiert (z.B. ZS 12345) und es gibt einen Redirect auf die URL http://suche.mylibrarydomain.de/searchterm=ZS+12345 . Gibt es keinen Bestand wird der Titel im ZDB-OPAC aufgerufen.
 ###2
-http://mynodesubdomain.mylibrarydomain.de:8888/?localUrl=http%3A%2F%2Fsuche.mylibrarydomain.de%2Fsearchterm%3D&bib=46&zdb=954135-4
+http://mylibrarydomain.de:8888/?localUrl=http%3A%2F%2Fsuche.mylibrarydomain.de%2Fsearchterm%3D&bib=46&zdb=954135-4
 
 Hier wird einfach nur nachgeschaut, ob die Bibliothek (Sigel 46) Bestand hat. Wenn ja, gibt dann einen Backlink in den Katalog mit der ZDB-ID als Suchparameter (Grundeinstellung)  http://suche.mylibrarydomain.de/searchterm=954135-4
 
