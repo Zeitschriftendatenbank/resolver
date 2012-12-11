@@ -1,9 +1,11 @@
 function route(parsedRequest, response,resolve,http) {
   var errmsg = "";
-  if (typeof parsedRequest.query["local"] == 'undefined' || parsedRequest.query["localUrl"] == "") 
+  if (typeof parsedRequest.query["localUrl"] == 'undefined' || parsedRequest.query["localUrl"] == "") 
   {
 	errmsg = "Unable to process request. Parameter 'localUrl' is not set. ";	
   }
+  
+  if(typeof parsedRequest.query["localSearchParam"] != 'undefined')
   if(typeof parsedRequest.query["bib"] == 'undefined' || parsedRequest.query["bib"] == "") 
   {
     errmsg = errmsg + "Unable to process request. Parameter 'bib' is not set.";

@@ -10,7 +10,7 @@ function reqSru(parsedRequest,response,http,buildResolveBody){
 	
 	buildUrl = function(localIdentifier,parsedRequest,response)
 	{
-		var resolveUrl = parsedRequest.query["local"]+localIdentifier;
+		var resolveUrl = parsedRequest.query["localUrl"]+localIdentifier;
 	}
 	
 	
