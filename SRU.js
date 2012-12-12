@@ -1,28 +1,23 @@
 var SrwAnalyzer = require("./SrwAnalyzer");
 function reqSru(parsedRequest,response,http,buildResolveBody){
-	var zdbParam = "zdbid%3D"+parsedRequest.query["zdb"];
+	//find out what to search zdbid or idn
+	var	sruSearchParam = (typeof parsedRequest.query["zdb"] != 'undefined') ? "zdbid%3D"+parsedRequest.query["zdb"] : "idn%3D"+parsedRequest.query["idn"];
+	//console.log(sruSearchParam);
 	var options = {
 		hostname: 'services.d-nb.de',
 		port: 80,
-		path: '/sru/zdb?version=1.1&recordSchema=MABxml-1-plus&operation=searchRetrieve&query='+zdbParam,
+		path: '/sru/zdb?version=1.1&recordSchema=MABxml-1-plus&operation=searchRetrieve&query='+sruSearchParam,
 		method: 'GET'
 	};
 	
-	buildUrl = function(localIdentifier,parsedRequest,response)
-	{
-		var resolveUrl = parsedRequest.query["localUrl"]+localIdentifier;
-	}
-	
-	
 	callback = function(res)
 	{
-		// test if status code is 200
-		
 		var srw = '';
 		//another chunk of data has been recieved, so append it to `str`
 		res.on('data', function (chunk) {
 			srw += chunk;
 		});
+		// test if status code is 200
 		if(res.statusCode == 200)
 		{
 			//the whole response has been recieved, so we give it to the analyzer
@@ -34,10 +29,7 @@ function reqSru(parsedRequest,response,http,buildResolveBody){
 		{
 			console.log("Error not received status code 200.\nStatus code: " + res.statuscode + "\nHEADERS: " + JSON.stringify(res.headers));
 			response.statusCode = res.statusCode;
-			buildResolveBody(false,response,http);
-			//response.writeHead(503, {"Content-Type": "text/html"});
-			//response.write("<h1>503 Service Temporarily Unavailable.</h1>");
-			//response.end();
+			buildResolveBody(false,false,'','',response,http);
 		}
 	}
 	http.request(options, callback).end();

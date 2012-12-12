@@ -6,23 +6,23 @@ function resolve(parsedRequest, response,http) {
 		SRU.reqSru(parsedRequest,response,http,buildResolveBody);
 	}
 	
-	buildResolveBody = function (sigSo,response,http){
+	buildResolveBody = function (holdings,sigSo,idn,zdbid,response,http){
 		var body = "";
 		var resolveUrl;
 		// on error
-		if(!sigSo && response.statusCode != 200) {
+		if(!holdings && response.statusCode != 200) {
 			//console.log(response.statusCode);
 			body = "Resolver says: " + http.STATUS_CODES[response.statusCode];
 			doResolve(body,response);
 		}
 		// no holdings
-		if(!sigSo && response.statusCode == 200) {
-			resolveUrl = "http://dispatch.opac.d-nb.de/DB=1.1/CMD?ACT=SRCHA&IKT=8506&SRT=LST_ty&TRM="+parsedRequest.query['zdb'];
+		if(!holdings && response.statusCode == 200) {
+			resolveUrl = "http://dispatch.opac.d-nb.de/DB=1.1/CMD?ACT=SRCHA&IKT=8506&SRT=LST_ty&TRM="+zdbid;
 		}
 		// found holding
 		else if(typeof parsedRequest.query['localSearchParam'] == 'undefined') // default search for zdbid
 		{
-			resolveUrl = parsedRequest.query['localUrl'] + parsedRequest.query['zdb'];
+			resolveUrl = parsedRequest.query['localUrl'] + zdbid;
 		}
 		else
 		{
@@ -44,7 +44,9 @@ function resolve(parsedRequest, response,http) {
 							//console.log(sig);
 							resolveUrl = parsedRequest.query['localUrl'] + sig;
 				break;
-				default: resolveUrl = parsedRequest.query['localUrl']  + parsedRequest.query['zdb'];
+				case 'idn': resolveUrl = parsedRequest.query['localUrl']  + idn;
+				break;
+				default: resolveUrl = parsedRequest.query['localUrl']  + zdbid;
 			}
 		}
 		

@@ -18,10 +18,11 @@ function route(parsedRequest, response,resolve,http) {
 
 	if(typeof parsedRequest.query["localSearchParam"] != 'undefined' 
 		& parsedRequest.query["localSearchParam"] != 'zdb' 
+		& parsedRequest.query["localSearchParam"] != 'idn' 
 		& parsedRequest.query["localSearchParam"] != 'sig'
 		& parsedRequest.query["localSearchParam"] != 'so')
 	{
-		errmsg = "Value of 'localSearchParam' can only be one of 'zdb', 'sig' or 'so'.";
+		errmsg = "Value of 'localSearchParam' can only be one of 'zdb', 'idn', 'sig' or 'so'.";
 	}
 	if(typeof parsedRequest.query["bib"] == 'undefined' || parsedRequest.query["bib"] == "") 
 	{
@@ -30,7 +31,11 @@ function route(parsedRequest, response,resolve,http) {
 
 	if(typeof parsedRequest.query["zdb"] == 'undefined' || parsedRequest.query["zdb"] == "") 
 	{
-		errmsg = errmsg + "Unable to process request. Parameter 'zdb' is not set.";
+		
+		if(typeof parsedRequest.query["idn"] == 'undefined' || parsedRequest.query["idn"] == "") 
+		{
+			errmsg = errmsg + "Unable to process request. Parameter 'zdb' or 'idn' is not set.";
+		}
 	}
 	if(errmsg != ""){
 		response.writeHead(400, {"Content-Type": "text/html"});
