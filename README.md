@@ -17,7 +17,7 @@ __zdb__ (obligatorisch): Die ZDB-ID der verwandten Ressource
 
 __bib__ (obligatorisch): Das Bibliothekssigel ihrer Einrichtung
 
-__localSearchParam__ (optional): Eine von 'zdb' (ZDB-ID), 'sig' (Signatur) oder 'so' (Standort)
+__localSearchParam__ (optional): Eine von 'zdb' (ZDB-ID), 'idn' (Datenbank-ID/Pica Production Number), 'sig' (Signatur) oder 'so' (Standort)
 
 ## Fiktive Beispiele
 ###1
