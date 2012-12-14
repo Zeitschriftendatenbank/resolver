@@ -25,9 +25,8 @@ http://mylibrarydomain.de:8888/?localUrl=http%3A%2F%2Fsuche.mylibrarydomain.de%2
 
 Der ZDB-Linkresolver sucht nach dem Titel mit der ZDB-ID 954135-4 und schaut nach, ob die Bibliothek, welche das Bibliothekssigel 46 hat, Bestand an dem Titel hat. Wenn ja, wird die Signatur extrahiert (z.B. ZS 12345) und es gibt einen Redirect auf die URL http://suche.mylibrarydomain.de/searchterm=ZS+12345 . Gibt es keinen Bestand wird der Titel im ZDB-OPAC aufgerufen.
 ###2
-http://mylibrarydomain.de:8888/?localUrl=http%3A%2F%2Fsuche.mylibrarydomain.de%2Fsearchterm%3D&bib=46&zdb=954135-4
+http://mylibrarydomain.de:8888/?localUrl=http%3A%2F%2Fsuche.mylibrarydomain.de%2Fsearchterm%3D&bib=46&idn=010029222
 
-Hier wird einfach nur nachgeschaut, ob die Bibliothek (Sigel 46) Bestand hat. Wenn ja, gibt dann einen Backlink in den Katalog mit der ZDB-ID als Suchparameter (Grundeinstellung)  http://suche.mylibrarydomain.de/searchterm=954135-4
-
+Hier wird anhand der IDN nachgeschaut, ob die Bibliothek (Sigel 46) Bestand hat. Wenn ja, gibt dann einen Backlink in den Katalog mit der ZDB-ID als Suchparameter (Grundeinstellung)  http://suche.mylibrarydomain.de/searchterm=954135-4
 ## Start und Test
 Starten Sie den ZDB-Linkresolver mir 'node index.js'. Der Resolver ist unter dem Port 8888 zu finden. Test sind unter /test/ zu finden.
