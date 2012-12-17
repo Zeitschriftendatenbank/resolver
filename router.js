@@ -1,3 +1,7 @@
+/**
+ * ZDB-Linkresolver
+ * Autor: Carsten Klee
+ * */
 var fs = require('fs');
 function route(parsedRequest, response,resolve,http) {
 	if(parsedRequest.path == "/test/"){

@@ -1,3 +1,7 @@
+/**
+ * ZDB-Linkresolver
+ * Autor: Carsten Klee
+ * */
 var SrwAnalyzer = require("./SrwAnalyzer");
 function reqSru(parsedRequest,response,http,buildResolveBody){
 	//find out what to search zdbid or idn

@@ -1,3 +1,7 @@
+/**
+ * ZDB-Linkresolver
+ * Autor: Carsten Klee
+ * */
 // needs xml2js to be installed
 var xml2js = require('xml2js');
 // needs JSONPath to be installed

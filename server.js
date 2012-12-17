@@ -1,3 +1,7 @@
+/**
+ * ZDB-Linkresolver
+ * Autor: Carsten Klee
+ * */
 var http = require("http");
 var url = require("url");
 

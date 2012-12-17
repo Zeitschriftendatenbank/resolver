@@ -1,3 +1,7 @@
+/**
+ * ZDB-Linkresolver
+ * Autor: Carsten Klee
+ * */
 var SRU = require("./SRU");
 
 function resolve(parsedRequest, response,http) {
